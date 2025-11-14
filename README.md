@@ -17,7 +17,7 @@ This component allows a Guest party to encrypt values and send them to a Host pa
 ## Installation
 
 ```bash
-cd fate-secure-func
+cd FATEDemo
 pip install -e .
 ```
 
@@ -87,7 +87,7 @@ pipeline.fit()
 ## Project Structure
 
 ```
-fate-secure-func/
+FATEDemo/
 ├── fate_secure_func/          # Server-side component
 │   ├── secure_func.py        # Main component entry
 │   ├── secure_func_guest.py  # Guest party logic
