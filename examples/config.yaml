@@ -1,0 +1,5 @@
+parties:
+  guest:
+    - '9999'
+  host:
+    - '10000'

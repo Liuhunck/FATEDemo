@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include pyproject.toml
+recursive-include fate_secure_func_client/component_define *.yaml
+recursive-include examples *.py *.yaml
+recursive-include docs *.md

@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fate-secure-func"
+dynamic = ["version"]
+description = "Secure Function Computation Component for FATE"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Iotsp Laboratory", email = "iotsp@example.com"}
+]
+keywords = ["federated-learning", "fate", "homomorphic-encryption", "privacy-preserving", "secure-computation"]
+
+dependencies = [
+    "pyfate>=2.2.0",
+    "torch>=1.13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/iotsp/fate-secure-func"
+Documentation = "https://github.com/iotsp/fate-secure-func/docs"
+Repository = "https://github.com/iotsp/fate-secure-func"
+"Bug Tracker" = "https://github.com/iotsp/fate-secure-func/issues"
+
+[project.entry-points."fate.ext.component_desc"]
+secure_func = "fate_secure_func.secure_func:secure_func"
+
+[tool.setuptools.dynamic]
+version = {attr = "fate_secure_func.__version__.__version__"}
+
+[tool.setuptools.packages.find]
+exclude = ["examples*"]
+
+[tool.setuptools.package-data]
+fate_secure_func_client = ["component_define/*.yaml"]

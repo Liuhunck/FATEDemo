@@ -1,0 +1,98 @@
+component:
+  name: secure_func
+  description: "Secure Function Computation Component\n\nThis component enables secure\
+    \ computation where:\n- Guest provides encrypted values\n- Host performs computation\
+    \ on encrypted data using a formula\n- Guest receives and decrypts the result\n\
+    \nParameters\n----------\nctx : Context\n    FATE context\nrole : Role\n    Current\
+    \ party role (GUEST or HOST)\nvalues : DataFrame\n    Input values (from guest)\n\
+    formula : DataFrame\n    Formula/coefficients (from host)\nresult : DataFrame\n\
+    \    Output result (to guest)\nhe_param : HEParam\n    Homomorphic encryption\
+    \ parameters\n\nExamples\n--------\n>>> # In pipeline:\n>>> from fate_secure_func_client\
+    \ import SecureFunc\n>>>\n>>> secure_func_0 = SecureFunc(\n...     \"secure_func_0\"\
+    ,\n...     values=reader.guest.outputs[\"output_data\"],\n...     formula=reader.hosts[0].outputs[\"\
+    output_data\"],\n...     he_param={\"kind\": \"paillier\", \"key_length\": 1024}\n\
+    ... )"
+  provider: iotsp
+  version: 2.2.0
+  labels: []
+  roles:
+    - guest
+    - host
+  parameters:
+    he_param:
+      type: HEParam
+      default:
+        kind: paillier
+        key_length: 1024
+      optional: true
+      description: Homomorphic encryption parameters (paillier, ou, or mock)
+      type_meta:
+        title: HEParam
+        $ref: '#/definitions/abc__HEParam'
+        definitions:
+          abc__HEParam:
+            title: HEParam
+            type: object
+            properties:
+              kind:
+                title: Kind
+                type: string
+              key_length:
+                title: Key Length
+                default: 1024
+                type: integer
+            required:
+              - kind
+        default:
+          kind: paillier
+          key_length: 1024
+        description: Homomorphic encryption parameters (paillier, ou, or mock)
+  input_artifacts:
+    data:
+      values:
+        types:
+          - dataframe
+        optional: false
+        stages:
+          - default
+        roles:
+          - guest
+        description: Input values from guest
+        is_multi: false
+      formula:
+        types:
+          - dataframe
+        optional: false
+        stages:
+          - default
+        roles:
+          - host
+        description: Input formula/coefficients from host
+        is_multi: false
+    model: {}
+  output_artifacts:
+    data:
+      result:
+        types:
+          - dataframe
+        optional: false
+        stages:
+          - default
+        roles:
+          - guest
+        description: Computed result
+        is_multi: false
+    model: {}
+    metric:
+      metric:
+        types:
+          - json_metric
+        optional: false
+        stages:
+          - default
+        roles:
+          - guest
+          - host
+        description: metric, invisible for user
+        is_multi: false
+schema_version: v1
