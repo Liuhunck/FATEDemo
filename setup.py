@@ -36,8 +36,9 @@ setup(
     },
     # Dependencies
     install_requires=[
-        "pyfate>=2.2.0",  # FATE framework
-        "torch>=1.13.0",  # PyTorch (used in guest implementation)
+        "fate-client>=2.2.0",
+        "fate-flow>=2.2.0",
+        "pyfate>=2.2.0",
     ],
     # Entry points: Register FATE component
     entry_points={

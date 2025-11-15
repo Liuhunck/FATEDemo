@@ -15,8 +15,9 @@ authors = [
 keywords = ["federated-learning", "fate", "homomorphic-encryption", "privacy-preserving", "secure-computation"]
 
 dependencies = [
+    "fate-client>=2.2.0",
+    "fate-flow>=2.2.0",
     "pyfate>=2.2.0",
-    "torch>=1.13.0",
 ]
 
 [project.urls]
